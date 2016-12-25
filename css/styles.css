@@ -1,0 +1,14 @@
+#pirate-cove {
+	/* Font */
+	font-family: 'Homemade Apple', cursive;
+
+	/* Center */
+	width: 510px;
+	height: 600px;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	margin: auto;
+}
