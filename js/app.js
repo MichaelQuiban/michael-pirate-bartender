@@ -1,37 +1,91 @@
 $( document ).ready(function() {
 
-	//An array containing the dialogue of the bartender.
-	var bartenderQuestions = [
-		"Do ye like yer drinks strong?",
-		"Do ye like it with a salty tang?",
-		"Are ye a lubber who likes it bitter?",
-		"Would ye like a bit of sweetness with yer poison?",
-		"Are ye one for a fruity finish?"
-	];
+//Constructor function for Questions, Ingredients, and Pantry, or MISC.
+var Questions = function(type, question) {
+  this.type = type;
+  this.question = question;
+};
 
-	//An object designed to contain the ingredients for a drink provided by the bartender.
-	var ingredients = {
-		strong: ["Glug of Rum", "Slug of Whisky","Splash of Gin"],
-		salty: ["Olive on a stick", "Salt-dusted rim", "Rasher of bacon"],
-		bitter: ["Shake of bitters", "Splash of tonic", "Twist of lemon peel"],
-		sweet: ["Sugar cube", "Spoonful of honey". "Splash of cola"],
-		fruity: ["Slice of orange", "Dash of cassis", "Cherry on top"]
-	}
+var Ingredients = function(type, description) {
+  this.type = type;
+  this.description = ingredient;
+};
 
-	//An array containing the dialogue of the chef.
-	var chefQuestions = [
-		"Hey man, what kind of burger do you want?",
-		"That's great, do you want any condiments?",
-		"Delicious choice, what kind of bun would you like?",
-		"Awesome, it'll be on it's way."
-	]
+var Pantry = function (ingredient) {
+  this.ingredient = {};
+};
 
+var Worker = function (name, question) {
+  this.name = name;
+  this.question = question;
+};
 
+var Bartender = function(name, question) {
+  Worker.call(this, name);
+  this.question = [];
+};
+//End Constructor functions for Questions, Ingredients, Pantry, MISC.
 
-    //Grab Value of submit form
-    $( "#pirate-question" ).submit(function( event ) {
-	  event.preventDefault();
-	  console.log("Answer Submitted")
-	});
+Pantry.prototype.addIngredient = function(ingredient) {
+  if (this.ingredients[ingredient.type]) {
+    this.ingredients[ingredient.type].push(ingredient.description);   
+  } else {
+    this.ingredients[ingredient.type] = [ingredient.description];
+  }
+};
+
+Pantry.prototype.getIngredient = function(type) {
+  //Grab array that matches the type.
+  //Generate a random number within the array. & Return Item.
+  var random = Math.floor(Math.random() * this.ingredients[type].length); 
+  return this.ingredients[type][random];                                  
+};
 
 });
+
+
+/*
+Bartender greets a customer
+If known, bartender offers customer his usual drink
+Else, bartender asks 5 questions about preference
+Prepares and names a drink that matches those preferences
+*/
+
+var myPantry = new Pantry();
+
+
+var ingredient = new Ingredient("strong", "A glug of rum");
+myPantry.addIngredient(ingredient);
+ingredient = new Ingredient("strong", "A shot of whiskey");
+myPantry.addIngredient(ingredient);
+ingredient = new Ingredient("strong", "A jigger of gin");
+myPantry.addIngredient(ingredient);
+
+ingredient = new Ingredient("sweet", "A spoonful of honey");
+myPantry.addIngredient(ingredient);
+ingredient = new Ingredient("sweet", "A cube of sugar");
+myPantry.addIngredient(ingredient);
+
+Worker.prototype.greet = function() {
+  //greet a customer
+}
+
+Bartender.prototype = Object.create(Worker.prototype);
+Bartender.prototype.constructor = Bartender;
+
+/* Other Objects:
+
+Worker
+- Bartender
+  - Questions
+- Cooks
+  - Questions
+
+Customer
+- Name
+- Preferences
+- Favorite
+
+Drink
+
+Question (text, type) */
