@@ -1,46 +1,36 @@
 $( document ).ready(function() {
 
 //Constructor function for Questions, Ingredients, and Pantry, or MISC.
-var Questions = function(type, question) {
-  this.type = type;
-  this.question = question;
-};
-
-var Ingredients = function(type, description) {
-  this.type = type;
-  this.description = ingredient;
-};
-
-var Pantry = function (ingredient) {
-  this.ingredient = {};
-};
-
-var Worker = function (name, question) {
+  var Worker = function(name, question) {
   this.name = name;
   this.question = question;
-};
+  };
 
-var Bartender = function(name, question) {
-  Worker.call(this, name);
-  this.question = [];
-};
-//End Constructor functions for Questions, Ingredients, Pantry, MISC.
+  var Question = function(type, question) {
+  this.type = type;
+  this.question = question;
+  };
 
-Pantry.prototype.addIngredient = function(ingredient) {
-  if (this.ingredients[ingredient.type]) {
-    this.ingredients[ingredient.type].push(ingredient.description);   
-  } else {
-    this.ingredients[ingredient.type] = [ingredient.description];
-  }
-};
+  var Ingredient = function(description) {
+    this.description = description;
+  };
 
-Pantry.prototype.getIngredient = function(type) {
-  //Grab array that matches the type.
-  //Generate a random number within the array. & Return Item.
-  var random = Math.floor(Math.random() * this.ingredients[type].length); 
-  return this.ingredients[type][random];                                  
-};
+  var Pantry = function(ingredient) {
+    this.ingredient = {};
+  };
+
+var strong = new Question("Do ye like yer drinks strong?");
+salty = new Question("Do ye like it with a salty tang?");
+bitter = new Question("Are ye a lubber who likes it bitter?");
+sweet = new Question("Would ye like a bit of sweetness with yer poison?");
+fruity = new Question("Are ye one for a fruity finish?");
+
 
 });
+  //End Constructor functions for Questions, Ingredients, Pantry, MISC.
+
+
+
+  //Strong Drinks
 
 
