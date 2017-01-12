@@ -12,6 +12,7 @@ $( document ).ready(function() {
   };
 
   var Ingredient = function(type, description) {
+    this.type = type;
     this.description = description;
   };
 
@@ -30,11 +31,11 @@ console.log(strong.type);
 console.log(strong.question);
 
 // Generate ingredients for the pantry
-var strongIngredient = new Ingredient("Strong" ["Glug of rum", "slug of whisky", "splash of gin"]);
-saltyIngredient = new Ingredient("Salty" ["Olive on a stick", "salt-dusted rim", "rasher of bacon"]);
-bitterIngredient = new Ingredient("Bitter" ["Shake of bitters", "splash of tonic", "twist of lemon peel"]);
-sweetIngredient = new Ingredient("Sweet" ["Sugar cube", "spoonful of honey", "splash of cola"]);
-fruityIngredient = new Ingredient("Fruity" ["Slice of orange", "dash of cassis", "cherry on top"]);
+var strongIngredient = new Ingredient("Strong", ["Glug of rum", "slug of whisky", "splash of gin"]);
+saltyIngredient = new Ingredient("Salty", ["Olive on a stick", "salt-dusted rim", "rasher of bacon"]);
+bitterIngredient = new Ingredient("Bitter", ["Shake of bitters", "splash of tonic", "twist of lemon peel"]);
+sweetIngredient = new Ingredient("Sweet", ["Sugar cube", "spoonful of honey", "splash of cola"]);
+fruityIngredient = new Ingredient("Fruity", ["Slice of orange", "dash of cassis", "cherry on top"]);
 //Strong ingredient description & Type should appear.
 console.log(strongIngredient.type);
 console.log(strongIngredient.description);
