@@ -19,11 +19,19 @@ $( document ).ready(function() {
     this.ingredient = {};
   };
 
-var strong = new Question("Do ye like yer drinks strong?");
-salty = new Question("Do ye like it with a salty tang?");
-bitter = new Question("Are ye a lubber who likes it bitter?");
-sweet = new Question("Would ye like a bit of sweetness with yer poison?");
-fruity = new Question("Are ye one for a fruity finish?");
+//Generate questions for the bartender using the Question constructor
+var strong = new Question("Strong", "Do ye like yer drinks strong?");
+salty = new Question("Salty", "Do ye like it with a salty tang?");
+bitter = new Question("Bitter", "Are ye a lubber who likes it bitter?");
+sweet = new Question("Sweet", "Would ye like a bit of sweetness with yer poison?");
+fruity = new Question("Fruity" ,"Are ye one for a fruity finish?");
+console.log(strong.type);
+console.log(strong.question);
+console.log(salty);
+
+// Generate ingredients for the pantry
+var strongIngredient = new Ingredient("");
+
 
 
 });
