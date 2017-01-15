@@ -3,10 +3,24 @@ $( document ).ready(function() {
   //Constructor function for Questions, Ingredients, and Pantry, or MISC.
   var Worker = function(name) {
     this.name = name;
+    this.customers = {};
   };
 
   Worker.prototype.greet = function() {
-    console.log("What's your name?");
+    var name = $("#user-name").val();
+    //Look up name
+    if(this.customers[name]) {
+      //Offer the usual
+    } else {
+      //Add new customer
+      this.addCustomer(name);
+    }
+    $("#greeting").hide();
+  };
+  
+  Worker.prototype.addCustomer = function(name){
+    var customer = new Customer(name);
+    this.customers[name] = customer;
   };
 
   var Bartender = function(name) {
@@ -20,6 +34,12 @@ $( document ).ready(function() {
   Bartender.prototype.addQuestion = function(question) {
     this.questions.push(question);
   };
+
+  var Customer = function(name) {
+    this.name = name;
+    this.preferences = [];
+    this.drink = "";
+  }
 
   var Question = function(type, question) {
     this.type = type;   
@@ -56,6 +76,8 @@ $( document ).ready(function() {
     this.ingredients = ingredients;
   };
 
+  var Preferences
+
   Drink.prototype.makeName = function(name) {
     var adjectives = ["Good", "New", "First", "Last", "Long"];
     var nouns = ["Parrot", "Peg-leg", "Poopdeck", "Blackbeard", "Booty"];
@@ -83,9 +105,6 @@ $( document ).ready(function() {
   question = new Question("Are ye one for a fruity finish?");
   myBartender.addQuestion(question);
 
-  //Strong question should appear in the console.
-  console.log(question.type);
-
   // Generate ingredients for the pantry
   var myPantry = new Pantry();
 
@@ -98,7 +117,6 @@ $( document ).ready(function() {
 
   var ingredient = new Ingredient("Strong", "Splash of Gin");
   myPantry.addIngredient(ingredient);
-  console.log(ingredient);
 
   //Salty
   ingredient = new Ingredient("Salty", "Olive on a stick");
@@ -109,7 +127,6 @@ $( document ).ready(function() {
 
   ingredient = new Ingredient("Salty", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
-  console.log(ingredient);
 
   //Bitter
   ingredient = new Ingredient("Bitter", "Shake of bitters");
@@ -120,7 +137,6 @@ $( document ).ready(function() {
 
   ingredient = new Ingredient("Bitter", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
-  console.log(ingredient);
 
   //Sweet
   ingredient = new Ingredient("Sweet", "Sugar cube");
@@ -131,7 +147,6 @@ $( document ).ready(function() {
 
   ingredient = new Ingredient("Sweet", "Splash of Cola");
   myPantry.addIngredient(ingredient);
-  console.log(ingredient);
 
   //Fruity
   ingredient = new Ingredient("Fruity", "Slice of orange");
@@ -142,8 +157,18 @@ $( document ).ready(function() {
 
   ingredient = new Ingredient("Fruity", "Cherry on top");
   myPantry.addIngredient(ingredient);
-  console.log(ingredient);
 
+  $("#name-area").submit(function( event ) {
+    event.preventDefault();
+    myBartender.greet();
+    console.log(myBartender);
+  });
+
+  $("#food-drink").submit(function( event ) {
+    event.preventDefault();
+
+
+  });
 
 
 });

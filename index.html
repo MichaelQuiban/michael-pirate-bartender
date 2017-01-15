@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel = 'stylesheet' type = 'text/css' href = 'css/styles.css'>
-	<link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel = 'stylesheet' type = 'text/css' href = 'css/styles.css'>
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
 </head>
 <body>
 
+<div id = greeting>
+    <form id = "name-area">
+        <p>What's your name?</p>
+        <input id = "user-name" type = 'text' required>
+        <button type = "submit">Submit</button>
+    </form>
+</div>
 <!-- Question Area -->
 <div id = 'user-area'>
-	<div id = 'bartender-question'></div>
-	<form id = 'food-drink'>
-		<select>
-			<option value = "" disabled selected> Select your choice</option>
-		</select>
-		<input id = "answer-submit" type = 'submit' value = 'Submit'></input>
-	<h3> What kind of burger would you like? </h3>
-		<select>
-			<option value = "" disabled selected> Select your choice</option>
-		</select>
-		<input id = "answer-submit" type = 'submit' value = 'Submit'></input>
-	</form>
+    <div id = 'bartender-question'></div>
+    <form id = 'food-drink'>
+        <select>
+            <option value = "" disabled selected> Select your choice</option>
+        </select>
+        <input id = "answer-submit" type = 'submit' value = 'Submit'></input>
+    </form>
 </div>
 
 <!-- Pirate Area -->
 <div id = 'pirate-cove'>
-	<h3>Welcome to Black Beard cove.. Come on in.</h3>
-	<section>
-		<img src = 'img/project-pirate.jpg' alt = 'This is not a pirate anymore' height = '425' width = '425'>
-		<p> Heartly enjoy ye stay... </p>
-	</section>
+    <h3>Welcome to Black Beard cove.. Come on in.</h3>
+    <section>
+        <img src = 'img/project-pirate.jpg' alt = 'This is not a pirate anymore' height = '425' width = '425'>
+        <p> Heartly enjoy ye stay... </p>
+    </section>
 </div>
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
