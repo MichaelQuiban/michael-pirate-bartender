@@ -1,39 +1,69 @@
 $( document ).ready(function() {
 
   //Constructor function for Questions, Ingredients, and Pantry, or MISC.
-    var Worker = function(name) {
-      this.name = name;
-    };
+  var Worker = function(name) {
+    this.name = name;
+  };
 
-    Worker.prototype.greet = function() {
-      console.log("What's your name?");
-    };
+  Worker.prototype.greet = function() {
+    console.log("What's your name?");
+  };
 
-    var Bartender = function(name) {
-      Worker.call(this, name);
-      this.questions = [];
-    };
+  var Bartender = function(name) {
+    Worker.call(this, name);
+    this.questions = [];
+  };
 
-    Bartender.prototype = Object.create(Worker.prototype);
-    Bartender.prototype.constructor = Bartender;
+  Bartender.prototype = Object.create(Worker.prototype);
+  Bartender.prototype.constructor = Bartender;
 
-    Bartender.prototype.addQuestion = function(question) {
-      this.questions.push(question);
-    };
+  Bartender.prototype.addQuestion = function(question) {
+    this.questions.push(question);
+  };
 
-    var Question = function(type, question) {
-      this.type = type;   
-      this.question = question;
-    };
+  var Question = function(type, question) {
+    this.type = type;   
+    this.question = question;
+  };
 
-    var Ingredient = function(type, description) {
-      this.type = type;
-      this.description = description;
-    };
+  var Ingredient = function(type, description) {
+    this.type = type;
+    this.description = description;
+  };
 
-    var Pantry = function() {
-      this.ingredients = {}; 
-    };
+  var Pantry = function() {
+    this.ingredients = {}; 
+  };
+
+  Pantry.prototype.addIngredient = function(ingredient) {
+    if (this.ingredients[ingredient.type]) {
+      this.ingredients[ingredient.type].push(ingredient.description);
+    } else {
+      this.ingredients[ingredient.type] = [ingredient.description];
+    }
+  };
+
+  Pantry.prototype.getIngredient = function(type) {
+   // get array that matches the type
+   // generate a random number within the range of how many items are in the array
+   // return the item from that index
+    var random = Math.floor(Math.random() * this.ingredients[type].length);
+    return this.ingredients[type][random];
+  };
+
+  var Drink = function(name, ingredients) {
+    this.name = name;
+    this.ingredients = ingredients;
+  };
+
+  Drink.prototype.makeName = function(name) {
+    var adjectives = ["Good", "New", "First", "Last", "Long"];
+    var nouns = ["Parrot", "Peg-leg", "Poopdeck", "Blackbeard", "Booty"];
+    var randomAdjective = adjectives[Math.floor(Math.random() * this.adjectives.length)];
+    var randomNouns = nouns[Math.floor(Math.random() * this.nouns.length)];
+    var randomName = randomAdjective + " " + randomNouns;
+    return randomName;
+  };
 
   var myBartender = new Bartender("Tim");
 
@@ -54,48 +84,67 @@ $( document ).ready(function() {
   myBartender.addQuestion(question);
 
   //Strong question should appear in the console.
-  console.log(strong.question);
-
+  console.log(question.type);
 
   // Generate ingredients for the pantry
   var myPantry = new Pantry();
 
-  Pantry.prototype.addIngredient = function(ingredient) {
-    if (this.ingredients[ingredient.type]) {
-      this.ingredients[ingredient.type].push(ingredient.description);
-    } else {
-      this.ingredients[ingredient.type] = [ingredient.description];
-    }
-  };
-
-  Pantry.prototype.getIngredient = function(type) {
-   // get array that matches the type
-   // generate a random number within the range of how many items are in the array
-   // return the item from that index
-    var random = Math.floor(Math.random() * this.ingredients[type].length);
-    return this.ingredients[type][random];
-  };
-
-/*"slug of whisky", "splash of gin"]
-"salt-dusted rim", "rasher of bacon"
-"splash of tonic", "twist of lemon peel
-"spoonful of honey", "splash of cola"
-*/
-
-  var ingredient = new Ingredient("Strong", "Glug of rum");
+  //Strong
+  var ingredient = new Ingredient("Strong", "Glug of Rum");
   myPantry.addIngredient(ingredient);
 
-  ingredient = new Ingredient("Salty", ["Olive on a stick", "salt-dusted rim", "rasher of bacon"]);
+  var ingredient = new Ingredient("Strong", "Slug of Whisky");
   myPantry.addIngredient(ingredient);
 
-  ingredient = new Ingredient("Bitter", ["Shake of bitters", "splash of tonic", "twist of lemon peel"]);
+  var ingredient = new Ingredient("Strong", "Splash of Gin");
+  myPantry.addIngredient(ingredient);
+  console.log(ingredient);
+
+  //Salty
+  ingredient = new Ingredient("Salty", "Olive on a stick");
   myPantry.addIngredient(ingredient);
 
-  ingredient = new Ingredient("Sweet", ["Sugar cube", "spoonful of honey", "splash of cola"]);
+  ingredient = new Ingredient("Salty", "Salt-dusted rim");
   myPantry.addIngredient(ingredient);
 
-  ingredient = new Ingredient("Fruity", ["Slice of orange", "dash of cassis", "cherry on top"]);
+  ingredient = new Ingredient("Salty", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
+  console.log(ingredient);
+
+  //Bitter
+  ingredient = new Ingredient("Bitter", "Shake of bitters");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Bitter", "Splash of Tonic");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Bitter", "Twist of lemon peel");
+  myPantry.addIngredient(ingredient);
+  console.log(ingredient);
+
+  //Sweet
+  ingredient = new Ingredient("Sweet", "Sugar cube");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Sweet", "Spoonful of Honey");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Sweet", "Splash of Cola");
+  myPantry.addIngredient(ingredient);
+  console.log(ingredient);
+
+  //Fruity
+  ingredient = new Ingredient("Fruity", "Slice of orange");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Fruity", "Dash of cassis");
+  myPantry.addIngredient(ingredient);
+
+  ingredient = new Ingredient("Fruity", "Cherry on top");
+  myPantry.addIngredient(ingredient);
+  console.log(ingredient);
+
+
 
 });
 
