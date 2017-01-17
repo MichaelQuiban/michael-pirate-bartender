@@ -48,7 +48,11 @@ $( document ).ready(function() {
     var counter = 0;
     if(counter < Tim.questions.length) {
       var displayQuestion = "<div id = 'bartender-question'>" + Tim.questions[counter].questions + "</div>";
-      var newQuestion = "<br><button id = 'next-question' type ='button'"
+      var choice = "<select id = 'user-choice'><option value = 'yes'>Yes!</option><option value = 'no'>No!</option></select>"
+      var newQuestion = "<br><button id = 'next-question' type = 'button'> Submit </button>"
+      $("#user-area").append(displayQuestion, choice, newQuestion);
+    } else {
+      console.log("Display something else.")
     }
   };
 
