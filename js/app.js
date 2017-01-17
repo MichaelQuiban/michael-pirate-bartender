@@ -45,14 +45,15 @@ $( document ).ready(function() {
     //Assign it to the customer favorite property.
   Bartender.prototype.askQuestions = function() {
     $("#bartender-question").empty();
-    var counter = 0;
-    if(counter < Tim.questions.length) {
-      var displayQuestion = "<div id = 'bartender-question'>" + Tim.questions[counter].questions + "</div>";
-      var choice = "<select id = 'user-choice'><option value = 'yes'>Yes!</option><option value = 'no'>No!</option></select>"
-      var newQuestion = "<br><button id = 'next-question' type = 'button'> Submit </button>"
-      $("#user-area").append(displayQuestion, choice, newQuestion);
-    } else {
-      console.log("Display something else.")
+    for(i = 0; i < myBartender.questions.length; i++) {
+      if(i < myBartender.questions.length) {
+        var displayQuestion = "<div id = 'bartender-question'>" + myBartender.questions[i].questions + "</div>";
+        var choice = "<select id = 'user-choice'><option value = 'yes'>Yes!</option><option value = 'no'>No!</option></select>"
+        var newQuestion = "<br><button id = 'next-question' type = 'button'> Submit </button>"
+        $("#user-area").append(displayQuestion, choice, newQuestion);
+      } else {
+        console.log("Display something else.");
+      }
     }
   };
 
@@ -187,7 +188,7 @@ $( document ).ready(function() {
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
-
+    myBartender.askQuestions();
   });
 
 
