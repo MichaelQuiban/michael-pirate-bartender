@@ -11,9 +11,9 @@ $( document ).ready(function() {
     //Look up name
     if(this.customers[name]) {
       //Offer the usual
-      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!";
+      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!"; //Requires Drink
       $("#customer-greet").empty();
-      $("#customer-greet").append(usual); //Requires Drink
+      $("#customer-greet").append(usual); 
     } else {
       //Add new customer
       this.addCustomer(name);
@@ -51,8 +51,8 @@ $( document ).ready(function() {
     for(i = 0; i < myBartender.questions.length; i++) {
       if(i < myBartender.questions.length) {
         var displayQuestion = "<div id = 'bartender-question'>" + myBartender.questions[i].question + "</div>";
-        var choice = "<select id = 'user-choice'><option value = 'yes'>Yes!</option><option value = 'no'>No!</option></select>"
-        var newQuestion = "<br><button id = 'next-question' type = 'button'> Submit </button>"
+        var choice = "<select id = 'user-choice'><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>"
+        var newQuestion = "<br><button id = 'next-question' type = 'button'>Submit</button>"
         $("#user-area").append(displayQuestion, choice, newQuestion);
       } else {
         console.log("Display something else.");
@@ -183,10 +183,19 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Fruity", "Cherry on top");
   myPantry.addIngredient(ingredient);
 
+  //Greeting Section
   $("#name-area").submit(function( event ) {
     event.preventDefault();
     myBartender.greet();
     console.log(myBartender);
+  });
+
+  //Push answers into the preferences array.
+  $(document).on("click", "#next-question", function () {
+    if ($("#user-choice").val() === "yes") {
+      //Push preferences into preferences object
+    }
+    
   });
 
   $("#food-drink").submit(function( event ) {
