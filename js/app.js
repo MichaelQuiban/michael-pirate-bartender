@@ -118,13 +118,13 @@ $( document ).ready(function() {
   question = new Question("Salty", "Do ye like it with a salty tang?");
   myBartender.addQuestion(question);
 
-  question = new Question("Are ye a lubber who likes it bitter?");
+  question = new Question("Bitter", "Are ye a lubber who likes it bitter?");
   myBartender.addQuestion(question);
 
-  question = new Question("Would ye like a bit of sweetness with yer poison?");
+  question = new Question("Sweet", "Would ye like a bit of sweetness with yer poison?");
   myBartender.addQuestion(question);
 
-  question = new Question("Are ye one for a fruity finish?");
+  question = new Question("Fruity", "Are ye one for a fruity finish?");
   myBartender.addQuestion(question);
 
   // Generate ingredients for the pantry
