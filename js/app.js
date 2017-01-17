@@ -35,6 +35,23 @@ $( document ).ready(function() {
     this.questions.push(question);
   };
 
+//Iterate through array of questions.
+    //Each type he appends the question text, the questions object. (Bartender question html)
+    //Then he will listen for a submit event on the form.
+    //If value = "Yes" push question.type onto the customers preferences array. //Keep track of customer
+    //At the end of the loop, after all questions have been asked make a drink based on those preferences.
+    //Iterate through the preferences in the pantry for the ingredient of that type.
+    //X number of ingredients which will be saved in the array. Name that drink. Create Drink.
+    //Assign it to the customer favorite property.
+  Bartender.prototype.askQuestions = function() {
+    $("#bartender-question").empty();
+    var counter = 0;
+    if(counter < Tim.questions.length) {
+      var displayQuestion = "<div id = 'bartender-question'>" + Tim.questions[counter].questions + "</div>";
+      var newQuestion = "<br><button id = 'next-question' type ='button'"
+    }
+  };
+
   var Customer = function(name) {
     this.name = name;
     this.preferences = [];
@@ -76,7 +93,7 @@ $( document ).ready(function() {
     this.ingredients = ingredients;
   };
 
-  var Preferences
+  var Preferences;
 
   Drink.prototype.makeName = function(name) {
     var adjectives = ["Good", "New", "First", "Last", "Long"];
@@ -166,7 +183,6 @@ $( document ).ready(function() {
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
-
 
   });
 
