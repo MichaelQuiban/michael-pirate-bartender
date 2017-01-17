@@ -47,7 +47,7 @@ $( document ).ready(function() {
     $("#bartender-question").empty();
     for(i = 0; i < myBartender.questions.length; i++) {
       if(i < myBartender.questions.length) {
-        var displayQuestion = "<div id = 'bartender-question'>" + myBartender.questions[i].questions + "</div>";
+        var displayQuestion = "<div id = 'bartender-question'>" + myBartender.questions[i].question + "</div>";
         var choice = "<select id = 'user-choice'><option value = 'yes'>Yes!</option><option value = 'no'>No!</option></select>"
         var newQuestion = "<br><button id = 'next-question' type = 'button'> Submit </button>"
         $("#user-area").append(displayQuestion, choice, newQuestion);
