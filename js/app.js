@@ -11,6 +11,9 @@ $( document ).ready(function() {
     //Look up name
     if(this.customers[name]) {
       //Offer the usual
+      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!";
+      $("#customer-greet").empty();
+      $("#customer-greet").append(usual); //Requires Drink
     } else {
       //Add new customer
       this.addCustomer(name);
