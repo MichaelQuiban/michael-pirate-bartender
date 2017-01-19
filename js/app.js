@@ -10,11 +10,11 @@ $( document ).ready(function() {
   };
 
   Worker.prototype.greet = function() {
-    var name = $("#user-name").val(); //Grab the name from the user using input.
+    var name = $("#name").val(); //Grab the name from the user using input.
     if(this.customers[name]) { 
       //Offer the usual
       var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!</h3>"; //Requires Drink
-      $("#customer-greet").append(usual); 
+      $("#usual-customer").append(usual); 
     } else {
       //Add new customer
       this.addCustomer(name);
@@ -194,9 +194,12 @@ $( document ).ready(function() {
   $("#name").submit(function( event ) {
     event.preventDefault();
     var customerName = $("#name").val();
-    myBartender.greet(customerName);
-    drinker = new Customer(customerName);
+    consumer = new Customer(customerName);
     console.log(myBartender);
+    $("#customer-greet").hide();
+    $("#user-name").hide();
+    $("#name-submit").hide();
+    $("#thanks").show();
   });
 
   //Push answers into the preferences array.
@@ -204,9 +207,8 @@ $( document ).ready(function() {
     var tastebuds = $("#user-choice").val();
     if (tastebuds === "yes") {
       //Push preferences into preferences object
-      
+      consumer.preferences.push(myBartender.questions[i].type);
     };
-
   });
 
   $("#food-drink").submit(function( event ) {
