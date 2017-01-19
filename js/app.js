@@ -49,8 +49,8 @@ $( document ).ready(function() {
     //Assign it to the customer favorite property.
   Bartender.prototype.askQuestions = function() {
     $("#bartender-question").empty();
-    for(i = 0; i < myBartender.questions.length; i++) {
-      if(i < myBartender.questions.length) {
+    for(i = counter; i < myBartender.questions.length; i++) {
+      if(counter < myBartender.questions.length) {
         var displayQuestion = "<div id = 'bartender-question'>" + myBartender.name + ": " + myBartender.questions[i].question + "</div>";
         var choice = "<select id = 'user-choice'><option>Choose</option><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>"
         var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit</button>"
@@ -195,6 +195,7 @@ $( document ).ready(function() {
     event.preventDefault();
     var customerName = $("#name").val();
     consumer = new Customer(customerName);
+    myBartender.greet(consumer);
     console.log(myBartender);
     $("#customer-greet").hide();
     $("#user-name").hide();
@@ -202,12 +203,14 @@ $( document ).ready(function() {
     $("#thanks").show();
   });
 
+var counter = 0;
   //Push answers into the preferences array.
   $(document).on("click", "#submit-pref", function () {
     var tastebuds = $("#user-choice").val();
     if (tastebuds === "yes") {
       //Push preferences into preferences object
-      consumer.preferences.push(myBartender.questions[i].type);
+      consumer.preferences.push(myBartender.questions[counter].type);
+      console.log(consumer);
     };
   });
 
