@@ -1,5 +1,8 @@
 $( document ).ready(function() {
 
+  //Hide the thanks section until user supplies a name.
+   $("#thanks").hide();
+
   //Constructor function for Questions, Ingredients, and Pantry, or MISC.
   var Worker = function(name) {
     this.name = name;
@@ -7,12 +10,10 @@ $( document ).ready(function() {
   };
 
   Worker.prototype.greet = function() {
-    var name = $("#user-name").val();
-    //Look up name
-    if(this.customers[name]) {
+    var name = $("#user-name").val(); //Grab the name from the user using input.
+    if(this.customers[name]) { 
       //Offer the usual
-      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!"; //Requires Drink
-      $("#customer-greet").empty();
+      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!</h3>"; //Requires Drink
       $("#customer-greet").append(usual); 
     } else {
       //Add new customer
@@ -81,19 +82,18 @@ $( document ).ready(function() {
   };
 
   Pantry.prototype.addIngredient = function(ingredient) {
-    if (this.ingredients[ingredient.type]) {
-      this.ingredients[ingredient.type].push(ingredient.description);
+    if (this.ingredients[ingredient.type]) { //Grab array that matches type.
+      this.ingredients[ingredient.type].push(ingredient.description); 
     } else {
       this.ingredients[ingredient.type] = [ingredient.description];
     }
   };
 
   Pantry.prototype.getIngredient = function(type) {
-   // get array that matches the type
-   // generate a random number within the range of how many items are in the array
-   // return the item from that index
-    var random = Math.floor(Math.random() * this.ingredients[type].length);
-    return this.ingredients[type][random];
+    if (this.ingredients[type]) { //Grab array that matches type.
+      var random = Math.floor(Math.random() * this.ingredients[type].length); //Generate random number with that range based on item amount.
+      return this.ingredients[type][random]; // Return the item from that index.
+    }
   };
 
   var Drink = function(name, ingredients) {
@@ -101,8 +101,7 @@ $( document ).ready(function() {
     this.ingredients = ingredients;
   };
 
-  var Preferences;
-
+  //Generate a random name out of adjectives and nouns for the drink
   Drink.prototype.makeName = function(name) {
     var adjectives = ["Good", "New", "First", "Last", "Long"];
     var nouns = ["Parrot", "Peg-leg", "Poopdeck", "Blackbeard", "Booty"];
@@ -112,6 +111,7 @@ $( document ).ready(function() {
     return randomName;
   };
 
+  //Generate a sweet name for the bartender.
   var myBartender = new Bartender("Tim");
 
   //Generate questions for the bartender using the Question constructor
@@ -133,7 +133,7 @@ $( document ).ready(function() {
   // Generate ingredients for the pantry
   var myPantry = new Pantry();
 
-  //Strong
+  //Create a strong ingredient and add them to the pantry.
   var ingredient = new Ingredient("Strong", "Glug of Rum");
   myPantry.addIngredient(ingredient);
 
@@ -143,7 +143,7 @@ $( document ).ready(function() {
   var ingredient = new Ingredient("Strong", "Splash of Gin");
   myPantry.addIngredient(ingredient);
 
-  //Salty
+  //Create a Salty ingredient and add them to the pantry.
   ingredient = new Ingredient("Salty", "Olive on a stick");
   myPantry.addIngredient(ingredient);
 
@@ -153,7 +153,7 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Salty", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
 
-  //Bitter
+  //Create a Bitter ingredient and add them to the pantry.
   ingredient = new Ingredient("Bitter", "Shake of bitters");
   myPantry.addIngredient(ingredient);
 
@@ -163,7 +163,7 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Bitter", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
 
-  //Sweet
+  //Create a Sweet ingredient and add them to the pantry.
   ingredient = new Ingredient("Sweet", "Sugar cube");
   myPantry.addIngredient(ingredient);
 
@@ -173,7 +173,7 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Sweet", "Splash of Cola");
   myPantry.addIngredient(ingredient);
 
-  //Fruity
+  //Create a Fruity ingredient and add them to the pantry.
   ingredient = new Ingredient("Fruity", "Slice of orange");
   myPantry.addIngredient(ingredient);
 
@@ -188,14 +188,17 @@ $( document ).ready(function() {
     event.preventDefault();
     myBartender.greet();
     console.log(myBartender);
+    $("#thanks").show();
   });
 
   //Push answers into the preferences array.
   $(document).on("click", "#next-question", function () {
-    if ($("#user-choice").val() === "yes") {
+    var tastebuds = $("#user-choice").val();
+    if (tastebuds === "yes") {
       //Push preferences into preferences object
-    }
-    
+      console.log("This is working!");
+    };
+
   });
 
   $("#food-drink").submit(function( event ) {
