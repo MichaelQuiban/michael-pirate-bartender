@@ -51,9 +51,9 @@ $( document ).ready(function() {
     $("#bartender-question").empty();
     for(i = 0; i < myBartender.questions.length; i++) {
       if(i < myBartender.questions.length) {
-        var displayQuestion = "<div id = 'bartender-question'>" + myBartender.questions[i].question + "</div>";
-        var choice = "<select id = 'user-choice'><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>"
-        var newQuestion = "<br><button id = 'next-question' type = 'button'>Submit</button>"
+        var displayQuestion = "<div id = 'bartender-question'>" + myBartender.name + ": " + myBartender.questions[i].question + "</div>";
+        var choice = "<select id = 'user-choice'><option>Choose</option><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>"
+        var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit</button>"
         $("#user-area").append(displayQuestion, choice, newQuestion);
       } else {
         console.log("Display something else.");
@@ -61,22 +61,27 @@ $( document ).ready(function() {
     }
   };
 
+  //Constructor function for Customers.
   var Customer = function(name) {
     this.name = name;
     this.preferences = [];
+    this.ingredients = [];
     this.drink = "";
   }
 
+  //Constructor function for Questions.
   var Question = function(type, question) {
     this.type = type;   
     this.question = question;
   };
 
+  //Constructor function for Ingredients.
   var Ingredient = function(type, description) {
     this.type = type;
     this.description = description;
   };
 
+  //Constructor function for the Pantry to store Ingredients.
   var Pantry = function() {
     this.ingredients = {}; 
   };
@@ -91,11 +96,13 @@ $( document ).ready(function() {
 
   Pantry.prototype.getIngredient = function(type) {
     if (this.ingredients[type]) { //Grab array that matches type.
-      var random = Math.floor(Math.random() * this.ingredients[type].length); //Generate random number with that range based on item amount.
+      //Generate random number with that range based on item amount.
+      var random = Math.floor(Math.random() * this.ingredients[type].length); 
       return this.ingredients[type][random]; // Return the item from that index.
     }
   };
 
+  //Constructor function for a Drink.
   var Drink = function(name, ingredients) {
     this.name = name;
     this.ingredients = ingredients;
@@ -183,20 +190,21 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Fruity", "Cherry on top");
   myPantry.addIngredient(ingredient);
 
-  //Greeting Section
-  $("#name-area").submit(function( event ) {
+  //Grab the users name, Greet the user, and save the user.
+  $("#name").submit(function( event ) {
     event.preventDefault();
-    myBartender.greet();
+    var customerName = $("#name").val();
+    myBartender.greet(customerName);
+    drinker = new Customer(customerName);
     console.log(myBartender);
-    $("#thanks").show();
   });
 
   //Push answers into the preferences array.
-  $(document).on("click", "#next-question", function () {
+  $(document).on("click", "#submit-pref", function () {
     var tastebuds = $("#user-choice").val();
     if (tastebuds === "yes") {
       //Push preferences into preferences object
-      console.log("This is working!");
+      
     };
 
   });
