@@ -10,16 +10,16 @@ $( document ).ready(function() {
   };
 
   Worker.prototype.greet = function() {
-    var name = $("#name").val(); //Grab the name from the user using input.
+    var name = $("#user-name").val(); //Grab the name from the user using input.
     if(this.customers[name]) { 
       //Offer the usual
-      var usual = "<h3>" + customers[name] + "!" + " Welcome back bucko!</h3>"; //Requires Drink
-      $("#usual-customer").append(usual); 
+      var usual = "<h3>" + name + "!" + " Welcome back bucko!</h3>"; //Requires Drink
+      $("#usual-customer").append(usual);
+      console.log(customers); 
     } else {
       //Add new customer
       this.addCustomer(name);
     }
-    $("#greeting").hide();
   };
   
   Worker.prototype.addCustomer = function(name){
@@ -193,29 +193,41 @@ $( document ).ready(function() {
   //Grab the users name, Greet the user, and save the user.
   $("#name").submit(function( event ) {
     event.preventDefault();
+    //Grab the name of the user
     var customerName = $("#name").val();
+    //Build an object with the new name.
     consumer = new Customer(customerName);
+    //Greet the customer.
     myBartender.greet(consumer);
-    console.log(myBartender);
+    //Hide the default greeting.
     $("#customer-greet").hide();
-    $("#user-name").hide();
-    $("#name-submit").hide();
+    $("#user-name", "#name-submit").hide();
+    //Thank the user and tell them to choose drink preferences.
     $("#thanks").show();
+    $("#user-name").val('');
+
   });
 
-var counter = 0;
+  //Global counter
+  var counter = 0;
+
   //Push answers into the preferences array.
   $(document).on("click", "#submit-pref", function () {
     var tastebuds = $("#user-choice").val();
     if (tastebuds === "yes") {
       //Push preferences into preferences object
       consumer.preferences.push(myBartender.questions[counter].type);
+      for (counter; i < consumer.preferences.length; i++) {
+        consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[counter]));
+      }
+      myBartender.addCustomer(consumer);
       console.log(consumer);
     };
   });
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
+    $("#food-drink").hide();
     myBartender.askQuestions();
   });
 
