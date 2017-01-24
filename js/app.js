@@ -10,12 +10,10 @@ $( document ).ready(function() {
   };
 
   Worker.prototype.greet = function() {
-    var name = $("#user-name").val(); //Grab the name from the user using input.
     if(this.customers[name]) { 
       //Offer the usual
-      var usual = "<h3>" + name + "!" + " Welcome back bucko!</h3>"; //Requires Drink
+      var usual = "<h3>" + this.name + "!" + " Welcome back bucko!</h3><br><p>The usual " + /*drink*/ + ".</p>"
       $("#usual-customer").append(usual);
-      console.log(customers); 
     } else {
       //Add new customer
       this.addCustomer(name);
@@ -39,24 +37,19 @@ $( document ).ready(function() {
     this.questions.push(question);
   };
 
-//Iterate through array of questions.
-    //Each type he appends the question text, the questions object. (Bartender question html)
-    //Then he will listen for a submit event on the form.
-    //If value = "Yes" push question.type onto the customers preferences array. //Keep track of customer
-    //At the end of the loop, after all questions have been asked make a drink based on those preferences.
-    //Iterate through the preferences in the pantry for the ingredient of that type.
-    //X number of ingredients which will be saved in the array. Name that drink. Create Drink.
-    //Assign it to the customer favorite property.
+  //Display questions and other sweet stuff for the user.
   Bartender.prototype.askQuestions = function() {
     $("#bartender-question").empty();
+      var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit</button>";
+      var disclaimer = "<br><p>Please select <b>one</b> drink preference below</p>"
+      $("#user-area").append(newQuestion,disclaimer);
     for(i = counter; i < myBartender.questions.length; i++) {
       if(counter < myBartender.questions.length) {
         var displayQuestion = "<div id = 'bartender-question'>" + myBartender.name + ": " + myBartender.questions[i].question + "</div>";
-        var choice = "<select id = 'user-choice'><option>Choose</option><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>"
-        var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit</button>"
-        $("#user-area").append(displayQuestion, choice, newQuestion);
+        var choice = "<select id = 'user-choice'><option>Choose</option><option value = 'yes'>Yarr!</option><option value = 'no'>No!</option></select>";
+        $("#user-area").append(displayQuestion, choice);
       } else {
-        console.log("Display something else.");
+        console.log("This shouldn't be seen, debug text");
       }
     }
   };
@@ -170,7 +163,7 @@ $( document ).ready(function() {
   ingredient = new Ingredient("Bitter", "Twist of lemon peel");
   myPantry.addIngredient(ingredient);
 
-  //Create a Sweet ingredient and add them to the pantry.
+  //Create a Sweet ingredient and add them to the pantry.s
   ingredient = new Ingredient("Sweet", "Sugar cube");
   myPantry.addIngredient(ingredient);
 
@@ -194,9 +187,11 @@ $( document ).ready(function() {
   $("#name").submit(function( event ) {
     event.preventDefault();
     //Grab the name of the user
-    var customerName = $("#name").val();
+    customerName = $("#user-name").val();
     //Build an object with the new name.
     consumer = new Customer(customerName);
+    console.log(myBartender);
+    console.log(consumer);
     //Greet the customer.
     myBartender.greet(consumer);
     //Hide the default greeting.
@@ -204,8 +199,8 @@ $( document ).ready(function() {
     $("#user-name", "#name-submit").hide();
     //Thank the user and tell them to choose drink preferences.
     $("#thanks").show();
+    //Clear the input after name retrieved.
     $("#user-name").val('');
-
   });
 
   //Global counter
@@ -220,10 +215,11 @@ $( document ).ready(function() {
       for (counter; i < consumer.preferences.length; i++) {
         consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[counter]));
       }
-      myBartender.addCustomer(consumer);
       console.log(consumer);
     };
   });
+
+  //Grab the preferences and radnomly get ingredient from pantry.
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
