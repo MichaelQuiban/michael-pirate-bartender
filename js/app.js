@@ -10,13 +10,13 @@ $( document ).ready(function() {
   };
 
   Worker.prototype.greet = function() {
-    if(this.customers[name]) { 
+    if(this.customers[customerName]) { 
       //Offer the usual
       var usual = "<h3>" + this.name + "!" + " Welcome back bucko!</h3><br><p>The usual " + /*drink*/ + ".</p>"
       $("#usual-customer").append(usual);
     } else {
       //Add new customer
-      this.addCustomer(name);
+      this.addCustomer(customerName);
     }
   };
   
@@ -40,9 +40,12 @@ $( document ).ready(function() {
   //Display questions and other sweet stuff for the user.
   Bartender.prototype.askQuestions = function() {
     $("#bartender-question").empty();
-      var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit</button>";
-      var disclaimer = "<br><p>Please select <b>one</b> drink preference below</p>"
-      $("#user-area").append(newQuestion,disclaimer);
+      //Taketh away the order.
+      var newOrder = "<br><button id = 'submit-order' type = 'button'> Submit Order</button>";
+      var newQuestion = "<br><button id = 'submit-pref' type = 'button'>Submit Preference</button>";
+      var disclaimer = "<br><p>Please select <b>one</b> drink preference below</p>";
+      //Append the takers of information.
+      $("#user-area").append(newQuestion, disclaimer, newOrder);
     for(i = counter; i < myBartender.questions.length; i++) {
       if(counter < myBartender.questions.length) {
         var displayQuestion = "<div id = 'bartender-question'>" + myBartender.name + ": " + myBartender.questions[i].question + "</div>";
@@ -59,7 +62,7 @@ $( document ).ready(function() {
     this.name = name;
     this.preferences = [];
     this.ingredients = [];
-    this.drink = "";
+    this.drink = {};
   }
 
   //Constructor function for Questions.
@@ -208,18 +211,21 @@ $( document ).ready(function() {
 
   //Push answers into the preferences array.
   $(document).on("click", "#submit-pref", function () {
-    var tastebuds = $("#user-choice").val();
-    if (tastebuds === "yes") {
+    if ($("#user-choice").val() === "yes") {
       //Push preferences into preferences object
       consumer.preferences.push(myBartender.questions[counter].type);
-      for (counter; i < consumer.preferences.length; i++) {
-        consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[counter]));
-      }
-      console.log(consumer);
     };
+      console.log(consumer);
   });
 
   //Grab the preferences and radnomly get ingredient from pantry.
+  $("#submit-order").submit(function(event) {
+    event.preventDefault();
+    for (var i = 0; i < consumer.preferences.length; i++) {
+      consumer.ingredients.push(pantry.getIngredient(consumer.preferences[i]));
+    };
+  });
+
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
