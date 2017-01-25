@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel = 'stylesheet' type = 'text/css' href = 'css/styles.css'>
-    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
-</head>
-<body>
-<!-- Area greeting the user -->
-<div id = "greeting">
-    <form id = "name">
-        <p id = "customer-greet">Hi-ho thar, what's ye moniker?</p>
-        <p id = "usual-customer"></p>
-        <input id = "user-name" type = "text" required>
-        <button id = "name-submit" type = "submit">Submit</button>
-        <p id = "thanks"> Hearty thanks fer th' moniker, Select th' button below to order..</p>
-    </form>
-</div>
-<!-- Question Area -->
-<div id = 'user-area'>
-    <div id = 'bartender-question'></div>
-    <form id = 'food-drink'>
-        <input id = "answer-submit" type = 'submit' value = "Let's Drink!"></input>
-    </form>
-</div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel='stylesheet' type='text/css' href='css/styles.css'>
+        <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Area greeting the user -->
+        <div id="greeting">
+            <form id="name">
+                <p id="customer-greet">Hi-ho thar, what's ye moniker?</p>
+                <input id="user-name" type="text" required>
+                <button id="name-submit" type="submit">Submit</button>             
+            </form>
+        </div>
+        <div id="usual-customer">
+            <p id="thanks"> Hearty thanks fer th' moniker, Select th' button below to order..</p>
+        </div>
+        <!-- Question Area -->
+        <div id='user-area'>
+            <div id='bartender-question'></div>
+            <form id='food-drink'>
+                <input id="answer-submit" type='submit' value="Let's Drink!"></input>
+            </form>
+        </div>
 
-<!-- Pirate Area -->
-<div id = 'pirate-cove'>
-    <h3>Welcome to Black Beard cove.. Come on in.</h3>
-    <section>
-        <img src = 'img/project-pirate.jpg' alt = 'This is not a pirate anymore' height = '425' width = '425'>
-        <p> Heartly enjoy ye stay... </p>
-    </section>
-</div>
-<script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-<script type = 'text/javascript' src = 'js/app.js'></script>
-</body>
+        <!-- Pirate Area -->
+        <div id='pirate-cove'>
+            <h3>Welcome to Black Beard cove.. Come on in.</h3>
+            <section>
+                <img src='img/project-pirate.jpg' alt='This is not a pirate anymore' height='425' width='425'>
+                <p> Heartly enjoy ye stay... </p>
+            </section>
+        </div>
+        
+        <script
+          src="https://code.jquery.com/jquery-3.1.1.min.js"
+          integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+          crossorigin="anonymous"></script>
+        <script type='text/javascript' src='js/app.js'></script>
+    </body>
 </html>
