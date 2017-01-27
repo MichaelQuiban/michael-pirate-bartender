@@ -1,9 +1,15 @@
+"use strict";
+
 $( document ).ready(function() {
 
   //Hide the thanks section until user supplies a name.
    $("#thanks").hide();
    $("#usual-customer").hide();
-   $("#user-area").hide();
+   $("#food-drink").hide();
+   $("#question-area").hide();
+   $("#order-drink").hide();
+   var customerName;
+   var consumer;
 
   //Constructor function for Questions, Ingredients, and Pantry, or MISC.
   var Worker=function(name) {
@@ -21,7 +27,7 @@ $( document ).ready(function() {
       //Add new customer
       this.addCustomer(customerName);
     }
-    $("#user-area").show();
+    $("#food-drink").show();
     $("#greeting").hide();
   };
   
@@ -44,19 +50,15 @@ $( document ).ready(function() {
 
   //Display questions and other sweet stuff for the user.
   Bartender.prototype.askQuestions=function() {
-    $("#bartender-question").empty();
       //Taketh away the order.
-    var newOrder="<br><button id='submit-order' type='button'> Submit Order</button>";
-    var newQuestion="<br><button id='submit-pref' type='button'>Submit Preference</button>";
-    var disclaimer="<br><p>Please select <b>one</b> drink preference below</p>";
     //Append the takers of information.
-    $("#user-area").append(newQuestion, disclaimer, newOrder);
-    for(i=0; i < myBartender.questions.length; i++) {
+    for (var i = 0; i < myBartender.questions.length; i++) {
       var displayQuestion="<div class='bartender-question' " + 
                           "id='question"+i+"'>" + myBartender.questions[i].question + "</div>";
-      var choice="<select id='user-choice'><option>Choose</option><option value='yes'>Yarr!</option><option value='no'>No!</option></select>";
-      $("#user-area").append(displayQuestion, choice);
+      var choice="<select id='user-choice"+i+"'><option>Choose</option><option value='yes'>Yarr!</option><option value='no'>No!</option></select>";
+      $("#bartender-question").prepend(displayQuestion, choice);
     }
+
   };
 
   //Constructor function for Customers.
@@ -142,10 +144,10 @@ $( document ).ready(function() {
   var ingredient=new Ingredient("Strong", "Glug of Rum");
   myPantry.addIngredient(ingredient);
 
-  var ingredient=new Ingredient("Strong", "Slug of Whisky");
+  ingredient=new Ingredient("Strong", "Slug of Whisky");
   myPantry.addIngredient(ingredient);
 
-  var ingredient=new Ingredient("Strong", "Splash of Gin");
+  ingredient=new Ingredient("Strong", "Splash of Gin");
   myPantry.addIngredient(ingredient);
 
   //Create a Salty ingredient and add them to the pantry.
@@ -220,22 +222,33 @@ $( document ).ready(function() {
       console.log(consumer);
   });
 
+  $("#bartender-question").submit(function(event) {
+    event.preventDefault();
+    for (var i = 0; i<myBartender.questions.length; i++) {
+      var item = "#user-choice" + i;
+      if ($(item).val() === "yes") {
+        consumer.preferences.push(myBartender.questions[i].type);        
+      }
+    }
+    $("#question-area").hide();
+    $("#order-drink").show();
+  });
+
   //Grab the preferences and radnomly get ingredient from pantry.
-  $("#submit-order").submit(function(event) {
+  $("#submit-order").click(function(event) {
     event.preventDefault();
     for (var i=0; i < consumer.preferences.length; i++) {
-      consumer.ingredients.push(pantry.getIngredient(consumer.preferences[i]));
+      consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[i]));
     };
+    console.log(consumer);    
   });
 
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
     $("#food-drink").hide();
+    $("#question-area").show();
     myBartender.askQuestions();
   });
 
-
 });
-
-
