@@ -8,6 +8,8 @@ $( document ).ready(function() {
    $("#food-drink").hide();
    $("#question-area").hide();
    $("#order-drink").hide();
+   $("#order-complete").hide();
+   $("#pirate-thanks").hide();
    var customerName;
    var consumer;
 
@@ -21,7 +23,7 @@ $( document ).ready(function() {
     $("#usual-customer").show();
     if(this.customers[customerName]) { 
       //Offer the usual
-      var usual="<h3>" + this.name + "!" + " Welcome back bucko!</h3><br><p>The usual " + /*drink*/ + ".</p>"
+      var usual="<h3>" + this.name + "!" + " Welcome back bucko!</h3><br><p>The usual " + randomName + ".</p>"
       $("#usual-customer").append(usual);
     } else {
       //Add new customer
@@ -102,19 +104,16 @@ $( document ).ready(function() {
     }
   };
 
-  //Constructor function for a Drink.
-  var Drink=function(name, ingredients) {
-    this.name=name;
-    this.ingredients=ingredients;
-  };
+  
 
   //Generate a random name out of adjectives and nouns for the drink
-  Drink.prototype.makeName=function(name) {
+  Bartender.prototype.makeName=function() {
     var adjectives=["Good", "New", "First", "Last", "Long"];
     var nouns=["Parrot", "Peg-leg", "Poopdeck", "Blackbeard", "Booty"];
-    var randomAdjective=adjectives[Math.floor(Math.random() * this.adjectives.length)];
-    var randomNouns=nouns[Math.floor(Math.random() * this.nouns.length)];
+    var randomAdjective=adjectives[Math.floor(Math.random() * adjectives.length)];
+    var randomNouns=nouns[Math.floor(Math.random() * nouns.length)];
     var randomName=randomAdjective + " " + randomNouns;
+    consumer.drink = randomName;
     return randomName;
   };
 
@@ -240,9 +239,13 @@ $( document ).ready(function() {
     for (var i=0; i < consumer.preferences.length; i++) {
       consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[i]));
     };
-    console.log(consumer);    
-  });
+    var newDrink = myBartender.makeName();
+    var displayEnd = "<p id = 'ingredient-text'>Using a " + consumer.ingredients + " " + " which is really" + " " + consumer.preferences + " I've created a drink called a " + " " + newDrink + "</p>";
+    $("#drink").append(displayEnd);
+   // $("#order-complete").show();
+    $("#submit-order").hide();
 
+  });
 
   $("#food-drink").submit(function( event ) {
     event.preventDefault();
@@ -250,5 +253,18 @@ $( document ).ready(function() {
     $("#question-area").show();
     myBartender.askQuestions();
   });
+
+  //Restart or ending to the program
+  //$("#yes").click(function(event) {6a
+   // $("#customer-greet").show();
+  //});
+
+  //$("#no").click(function(event){
+   // $("#")
+    //$("#pirate-thanks").show();
+ // });
+
+
+
 
 });
