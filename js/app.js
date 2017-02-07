@@ -19,7 +19,7 @@ $( document ).ready(function() {
     this.customers={};
   };
 
-  Worker.prototype.greet=function() {
+  Worker.prototype.greet=() => {
     $("#usual-customer").show();
     if(this.customers[customerName]) { 
       //Offer the usual
@@ -51,7 +51,7 @@ $( document ).ready(function() {
   };
 
   //Display questions and other sweet stuff for the user.
-  Bartender.prototype.askQuestions=function() {
+  Bartender.prototype.askQuestions=() => {
       //Taketh away the order.
     //Append the takers of information.
     for (let i = 0; i < myBartender.questions.length; i++) {
@@ -60,7 +60,6 @@ $( document ).ready(function() {
       let choice="<select id='user-choice"+i+"'><option>Choose</option><option value='yes'>Yarr!</option><option value='no'>No!</option></select>";
       $("#bartender-question").prepend(displayQuestion, choice);
     }
-
   };
 
   //Constructor function for Customers.
@@ -107,7 +106,7 @@ $( document ).ready(function() {
   
 
   //Generate a random name out of adjectives and nouns for the drink
-  Bartender.prototype.makeName=function() {
+  Bartender.prototype.makeName=() => {
     let adjectives=["Good", "New", "First", "Last", "Long"];
     let nouns=["Parrot", "Peg-leg", "Poopdeck", "Blackbeard", "Booty"];
     let randomAdjective=adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -190,7 +189,7 @@ $( document ).ready(function() {
   myPantry.addIngredient(ingredient);
 
   //Grab the users name, Greet the user, and save the user.
-  $("#name").submit(function( event ) {
+  $("#name").submit(event => {
     event.preventDefault();
     //Grab the name of the user
     customerName=$("#user-name").val();
@@ -213,7 +212,7 @@ $( document ).ready(function() {
   let counter=0;
 
   //Push answers into the preferences array.
-  $(document).on("click", "#submit-pref", function () {
+  $(document).on("click", "#submit-pref", () => {
     if ($("#user-choice").val() === "yes") {
       //Push preferences into preferences object
       consumer.preferences.push(myBartender.questions[counter].type);
@@ -221,7 +220,7 @@ $( document ).ready(function() {
       console.log(consumer);
   });
 
-  $("#bartender-question").submit(function(event) {
+  $("#bartender-question").submit(event => {
     event.preventDefault();
     for (let i = 0; i<myBartender.questions.length; i++) {
       let item = "#user-choice" + i;
@@ -234,7 +233,7 @@ $( document ).ready(function() {
   });
 
   //Grab the preferences and radnomly get ingredient from pantry.
-  $("#submit-order").click(function(event) {
+  $("#submit-order").click(event => {
     event.preventDefault();
     for (let i=0; i < consumer.preferences.length; i++) {
       consumer.ingredients.push(myPantry.getIngredient(consumer.preferences[i]));
@@ -245,7 +244,7 @@ $( document ).ready(function() {
     $("#submit-order").hide();
   });
 
-  $("#food-drink").submit(function( event ) {
+  $("#food-drink").submit(event => {
     event.preventDefault();
     $("#food-drink").hide();
     $("#question-area").show();
